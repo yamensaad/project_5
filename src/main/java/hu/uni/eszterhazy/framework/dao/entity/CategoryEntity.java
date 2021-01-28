@@ -4,6 +4,8 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
+import net.bytebuddy.dynamic.loading.InjectionClassLoader;
+import org.springframework.boot.autoconfigure.web.ResourceProperties;
 
 import javax.persistence.*;
 import java.sql.Timestamp;
@@ -17,14 +19,11 @@ import java.sql.Timestamp;
 
 public class CategoryEntity {
     @Id
-   @GeneratedValue(strategy = GenerationType.AUTO)
-   @Column(name = "category_id ")
-    private int category_id;
-    @Column
-  private  String name;
-
-    @Column
-   Timestamp last_update;
+    @GeneratedValue(strategy = GenerationType.AUTO)
+    private String category_id;
+    private String    name;
+   private String last_update;
+   private String   actor_id;
 
 
 

@@ -27,6 +27,8 @@ public class App implements CommandLineRunner
 
 
 
+
+
     }
 
     @Override
@@ -34,8 +36,7 @@ public class App implements CommandLineRunner
         System.out.println("hello world");
 
         ActorDao dao = context.getBean(ActorDao.class);
-
-
+        dao.readAll().stream().forEach(System.out::println);
 
 
 

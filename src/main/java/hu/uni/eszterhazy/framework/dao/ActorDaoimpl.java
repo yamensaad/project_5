@@ -1,3 +1,4 @@
+
 package hu.uni.eszterhazy.framework.dao;
 
 import hu.uni.eszterhazy.framework.dao.entity.ActorEntity;
@@ -6,7 +7,9 @@ import lombok.RequiredArgsConstructor;
 import org.springframework.stereotype.Service;
 
 import java.util.Collection;
+import java.util.stream.Collector;
 import java.util.stream.Collectors;
+import java.util.stream.Stream;
 import java.util.stream.StreamSupport;
 
 @Service
@@ -16,25 +19,24 @@ public class ActorDaoimpl implements ActorDao {
     private  final ActorRepository repository;
 
 
-    public void printActor() {
-        System.out.println("repository:" +repository);
-        StreamSupport.stream(repository.findAll().spliterator(),false).forEach(actorEntity -> {
-            System.out.println(actorEntity);
-        });
-    }
-
-
     @Override
     public Collection<Actor> readAll() {
-        return StreamSupport.stream(repository.findAll().spliterator(), false).map((actorEntity -> {
-            return new Actor(
+        return StreamSupport.stream(repository.findAll().spliterator(),false).map((actorEntity -> new Actor(
+                actorEntity.getFirst_name(),
+                actorEntity.getLast_name(),
+                actorEntity.getActor_id()
+
+        ))).collect(Collectors.toList());
 
 
-            );
 
+    }
 
-        })).collect(Collectors.toList());
-
+    @Override
+    public void createActor(Actor actor) {
+       repository.save(ActorEntity.builder()
+               .actor(get.getId);
 
     }
 }
+
